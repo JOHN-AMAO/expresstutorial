@@ -3,9 +3,11 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const { error } = require("console");
 
 var app = express();
 
@@ -38,5 +40,16 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+mongoose.set("strictQuery", false);
+
+const MONGOURL =
+  "mongodb+srv://amaojohn767:6CA0SNtaY27O3Oic@locallibrary.zjh9ekw.mongodb.net/?retryWrites=true&w=majority";
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect(MONGOURL);
+}
 
 module.exports = app;
