@@ -52,4 +52,15 @@ async function main() {
   await mongoose.connect(MONGOURL);
 }
 
+//db
+
+const Schema = mongoose.Schema;
+
+const User = new Schema({
+  name: String,
+  age: String,
+});
+
+const UserModel = mongoose.model("User", User);
+
 module.exports = app;
